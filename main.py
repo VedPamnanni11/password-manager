@@ -1,3 +1,4 @@
+from tabulate import tabulate
 import os
 import sys
 import csv
@@ -8,13 +9,20 @@ def main():
         conform_password = input("Conform password: ")
         if password == conform_password:
             with open("login.csv", "w") as login:
-               writer = csv.DictWriter(login, fieldnames=["password"])
-               writer.writeheader()
-               writer.writerow({"password": password}) 
+               writer = csv.writer(login)
+               writer.writerow([password])
+            manager()
         else:
-            ...
+            sys.exit("The passwords do not match. User was not created!")
     else:
-        ...    
-    
+        login_password = input("Type your password: ")
+        with open("login.csv", "r") as file:
+            for user in file:
+                if login_password in user:
+                    manager()
+                else:
+                    sys.exit("Wrong password!")
+def manager():
+    ...
     
 main()
