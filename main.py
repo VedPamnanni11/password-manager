@@ -23,6 +23,8 @@ def main():
                 else:
                     sys.exit("Wrong password!")
 def manager():
-    ...
-    
+    print("\nWelcome to the Password Manager!\n")
+    headers = ["Number", "Setting"]
+    table = [[1, "View passwords"], [2, "Add new password"], [3, "Delete a password"]]
+    print(tabulate(table, headers, tablefmt="grid"))
 main()
