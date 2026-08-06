@@ -1,4 +1,5 @@
 from tabulate import tabulate
+from termcolor import cprint
 import os
 import sys
 import csv
@@ -27,4 +28,31 @@ def manager():
     headers = ["Number", "Setting"]
     table = [[1, "View passwords"], [2, "Add new password"], [3, "Delete a password"]]
     print(tabulate(table, headers, tablefmt="grid"))
+    while True:
+        try:
+            setting = int(input("Type the number of the setting you want to choose: "))
+            break
+        except ValueError:
+            cprint("\nType a number!\n", "red")
+            manager()
+    
+    if setting == 1:
+        view_passwords()
+    elif setting == 2:
+        add_new_password()
+    elif setting == 3:
+        delete_password()
+    else:
+        cprint("\nInvalid setting!", "red")
+        manager()
+        
+def view_passwords():
+    ...
+    
+def add_new_password():
+    ...
+
+def delete_password():
+    ...
+    
 main()
