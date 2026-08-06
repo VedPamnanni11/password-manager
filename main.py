@@ -1,5 +1,5 @@
 from tabulate import tabulate
-from termcolor import cprint
+from termcolor import cprint, colored
 import os
 import sys
 import csv
@@ -26,7 +26,7 @@ def main():
 def manager():
     print("\nWelcome to the Password Manager!\n")
     headers = ["Number", "Setting"]
-    table = [[1, "View passwords"], [2, "Add new password"], [3, "Delete a password"]]
+    table = [[1, "View passwords"], [2, "Add new password"], [3, "Delete a password"], [4, "Exit"]]
     print(tabulate(table, headers, tablefmt="grid"))
     while True:
         try:
@@ -42,6 +42,8 @@ def manager():
         add_new_password()
     elif setting == 3:
         delete_password()
+    elif setting == 4:
+        sys.exit(colored("\nYou have exited the program!\n", "green"))
     else:
         cprint("\nInvalid setting!\n", "red")
         manager()
