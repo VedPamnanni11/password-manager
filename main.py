@@ -47,12 +47,12 @@ def manager():
         manager()
         
 def view_passwords():
-    ...
+    sys.exit()
     
 def add_new_password():
-    ...
+    sys.exit()
 
 def delete_password():
-    ...
+    sys.exit()
     
 main()
