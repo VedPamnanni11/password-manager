@@ -43,7 +43,7 @@ def manager():
     elif setting == 3:
         delete_password()
     else:
-        cprint("\nInvalid setting!", "red")
+        cprint("\nInvalid setting!\n", "red")
         manager()
         
 def view_passwords():
