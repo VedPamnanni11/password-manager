@@ -50,9 +50,11 @@ def manager():
         
 def view_passwords():
     headers = ["Name", "Password"]
-    with open("passwords.csv", "r") as file:
+    with open("passwords.csv", "w") as file:
+        writer = csv.DictWriter(file, fieldnames=["Name", "Password"])
+        writer.writeheader()
         for i in file:
-            ...
+            print(i["Name"])
     
 def add_new_password():
     with open("passwords.csv", "a"):
