@@ -49,12 +49,17 @@ def manager():
         manager()
         
 def view_passwords():
-    sys.exit()
+    headers = ["Name", "Password"]
+    with open("passwords.csv", "r") as file:
+        for i in file:
+            ...
     
 def add_new_password():
-    sys.exit()
+    with open("passwords.csv", "a"):
+        ...
 
 def delete_password():
-    sys.exit()
+    with open("passwords.csv", "a"):
+        ...
     
 main()
