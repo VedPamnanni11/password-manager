@@ -5,11 +5,11 @@ import sys
 import csv
 
 def main():
-    if os.path.exists("password-manager/login.csv") == False:
+    if os.path.exists("login.csv") == False:
         password = input("You have to create a new account. Type your password here: ")
         conform_password = input("Conform password: ")
         if password == conform_password:
-            with open("password-manager/login.csv", "w") as login:
+            with open("login.csv", "w") as login:
                writer = csv.writer(login)
                writer.writerow([password])
             manager()
@@ -17,7 +17,7 @@ def main():
             sys.exit("The passwords do not match. User was not created!")
     else:
         login_password = input("Type your password: ")
-        with open("password-manager/login.csv", "r") as file:
+        with open("login.csv", "r") as file:
             for user in file:
                 if login_password in user:
                     manager()
@@ -49,12 +49,8 @@ def manager():
         manager()
         
 def view_passwords():
-    headers = ["Name", "Password"]
-    with open("passwords.csv", "w") as file:
-        writer = csv.DictWriter(file, fieldnames=["Name", "Password"])
-        writer.writeheader()
-        for i in file:
-            print(i["Name"])
+    with open("passwords.csv", "r"):
+        ...
     
 def add_new_password():
     with open("passwords.csv", "a"):
