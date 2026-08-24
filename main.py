@@ -5,24 +5,23 @@ import sys
 import csv
 
 def main():
-    if os.path.exists("login.csv") == False:
+    if os.path.exists("passwords.csv") == False:
         password = input("You have to create a new account. Type your password here: ")
         conform_password = input("Conform password: ")
         if password == conform_password:
-            with open("login.csv", "w") as login:
-               writer = csv.writer(login)
-               writer.writerow([password])
             manager()
         else:
-            sys.exit("The passwords do not match. User was not created!")
+            sys.exit(colored("\nThe passwords do not match. User was not created!\n", "red"))
     else:
         login_password = input("Type your password: ")
-        with open("login.csv", "r") as file:
-            for user in file:
-                if login_password in user:
+        with open("passwords.csv", "r") as file:
+            info = csv.DictReader(file)
+            for user in info:
+                if user["id"] == login_password:
                     manager()
                 else:
                     sys.exit("Wrong password!")
+
 def manager():
     print("\nWelcome to the Password Manager!\n")
     headers = ["Number", "Setting"]
@@ -49,15 +48,18 @@ def manager():
         manager()
         
 def view_passwords():
-    with open("passwords.csv", "r"):
-        ...
+    try:
+        with open("passwords.csv", "r") as file:
+            ...
+    except FileNotFoundError:
+        sys.exit(colored("\nYou have no passwords to view.\n", "red"))
     
 def add_new_password():
-    with open("passwords.csv", "a"):
+    with open("passwords.csv", "a") as file:
         ...
 
 def delete_password():
-    with open("passwords.csv", "a"):
+    with open("passwords.csv", "a") as file:
         ...
     
 main()
