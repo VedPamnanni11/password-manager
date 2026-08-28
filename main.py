@@ -9,20 +9,15 @@ def main():
         password = input("You have to create a new account. Type your password here: ")
         conform_password = input("Conform password: ")
         if password == conform_password:
-            manager()
+            manager(password)
         else:
             sys.exit(colored("\nThe passwords do not match. User was not created!\n", "red"))
     else:
         login_password = input("Type your password: ")
         with open("passwords.csv", "r") as file:
-            info = csv.DictReader(file)
-            for user in info:
-                if user["id"] == login_password:
-                    manager()
-                else:
-                    sys.exit("Wrong password!")
+            ...
 
-def manager():
+def manager(password):
     print("\nWelcome to the Password Manager!\n")
     headers = ["Number", "Setting"]
     table = [[1, "View passwords"], [2, "Add new password"], [3, "Delete a password"], [4, "Exit"]]
@@ -33,19 +28,19 @@ def manager():
             break
         except ValueError:
             cprint("\nType a number!\n", "red")
-            manager()
+            manager(password)
     
     if setting == 1:
         view_passwords()
     elif setting == 2:
-        add_new_password()
+        add_new_password(password)
     elif setting == 3:
         delete_password()
     elif setting == 4:
         sys.exit(colored("\nYou have exited the program!\n", "green"))
     else:
         cprint("\nInvalid setting!\n", "red")
-        manager()
+        manager(password)
         
 def view_passwords():
     try:
@@ -54,7 +49,13 @@ def view_passwords():
     except FileNotFoundError:
         sys.exit(colored("\nYou have no passwords to view.\n", "red"))
     
-def add_new_password():
+def add_new_password(password):
+    if os.path.exists("passwords.csv") == False:
+        with open("passwords.csv", "w") as head:
+            info = csv.DictWriter(head, fieldnames=["Website", "Username", "Password"])
+            info.writeheader()
+            info.writerow({"Website": "PassMan", "Username": "N/A", "Password": password})
+
     with open("passwords.csv", "a") as file:
         ...
 
