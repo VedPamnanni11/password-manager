@@ -63,4 +63,5 @@ def delete_password():
     with open("passwords.csv", "a") as file:
         ...
     
-main()
+if __name__ == "__main__":
+    main()
